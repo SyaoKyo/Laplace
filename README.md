@@ -4,7 +4,7 @@
 
 
 
-# 原理
+## 原理
 
 1. 前一节我们学习了 *Sobel 算子* ，其基础来自于一个事实，即在边缘部分，像素值出现”跳跃“或者较大的变化。如果在此边缘部分求取一阶导数，你会看到极值的出现。正如下图所示：
 
@@ -20,18 +20,18 @@
 
    你会发现在一阶导数的极值位置，二阶导数为0。所以我们也可以用这个特点来作为检测图像边缘的方法。 但是， 二阶导数的0值不仅仅出现在边缘(它们也可能出现在无意义的位置),但是我们可以过滤掉这些点。
 
-## Laplacian 算子
+   ### Laplacian 算子
 
-1. 从以上分析中，我们推论二阶导数可以用来 *检测边缘* 。 因为图像是 “*2维*”, 我们需要在两个方向求导。使用Laplacian算子将会使求导过程变得简单。
-2. *Laplacian 算子* 的定义:
+   1. 从以上分析中，我们推论二阶导数可以用来 *检测边缘* 。 因为图像是 “*2维*”, 我们需要在两个方向求导。使用Laplacian算子将会使求导过程变得简单。
+   2. *Laplacian 算子* 的定义:
 
-<div align=center>
-   <img src="./pic/b7e0e54736500f2886c2fa2118852f1fa01d238e.png" alt="Laplace(f) = \dfrac{\partial^{2} f}{\partial x^{2}} + \dfrac{\partial^{2} f}{\partial y^{2}}">
-</div>
+   <div align=center>
+      <img src="./pic/b7e0e54736500f2886c2fa2118852f1fa01d238e.png" alt="Laplace(f) = \dfrac{\partial^{2} f}{\partial x^{2}} + \dfrac{\partial^{2} f}{\partial y^{2}}">
+   </div>
 
-3. OpenCV函数 [Laplacian](http://opencv.willowgarage.com/documentation/cpp/image_filtering.html#cv-laplacian) 实现了Laplacian算子。 实际上，由于 Laplacian使用了图像梯度，它内部调用了 *Sobel* 算子。
+   3. OpenCV函数 [Laplacian](http://opencv.willowgarage.com/documentation/cpp/image_filtering.html#cv-laplacian) 实现了Laplacian算子。 实际上，由于 Laplacian使用了图像梯度，它内部调用了 *Sobel* 算子。
 
-# 代码解释
+## 代码解释
 
 1. 首先申明变量:
 
@@ -47,10 +47,12 @@
 2. 装载原图像:
 
    ```C++
-   src = imread( argv[1] );
+   src = imread("cat.jpg");
    
    if( !src.data )
-     { return -1; }
+   {
+       return -1; 
+   }
    ```
 
 3. 高斯平滑降噪:
